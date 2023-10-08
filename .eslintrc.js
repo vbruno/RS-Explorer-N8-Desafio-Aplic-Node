@@ -21,6 +21,9 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
   },
+  settings: {
+    'import/core-modules': ['dayjs'],
+  },
   rules: {
     'no-console': 'off',
     'class-methods-use-this': 'off',

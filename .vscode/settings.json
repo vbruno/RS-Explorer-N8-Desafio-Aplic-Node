@@ -8,6 +8,7 @@
         "airbnb",
         "AUTOINCREMENT",
         "DATETIME",
+        "dayjs",
         "knexfile",
         "sqlite",
         "VARCHAR"

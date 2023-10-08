@@ -1,5 +1,40 @@
 @rota = users
+@idUser = 1
 
 ###
-# name test
-GET {{url}}/{{rota}}/111
+# @name test
+GET {{url}}/{{rota}}
+
+###
+# @name CreateUser
+POST {{url}}/{{rota}}/create
+Content-Type: application/json
+
+{
+    "name": "Teste",
+    "email": "test@com.br",
+    "password": "123456"
+}
+
+###
+# @name ShowAll
+GET {{url}}/{{rota}}/showAll
+
+###
+# @name ShowUser
+GET {{url}}/{{rota}}/{{idUser}}
+
+###
+# @name DeleteUser
+DELETE {{url}}/{{rota}}/{{idUser}}
+
+###
+# @name UpdateUser
+PUT {{url}}/{{rota}}/{{idUser}}
+Content-Type: application/json
+
+{
+    "name": "Bruno",
+    "email": "bruno@teste.com.br",
+    "password": "123456"
+}

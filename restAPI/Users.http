@@ -1,0 +1,5 @@
+@rota = users
+
+###
+# name test
+GET {{url}}/{{rota}}

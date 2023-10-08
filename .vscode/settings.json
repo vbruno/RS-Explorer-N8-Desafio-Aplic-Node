@@ -1,0 +1,19 @@
+{
+  "rest-client.environmentVariables": {
+
+    "$shared": {
+      "url": "http://localhost:3000"
+    },
+
+  },
+  "cSpell.words": [
+    "AUTOINCREMENT",
+    "DATETIME",
+    "knexfile",
+    "sqlite",
+    "VARCHAR"
+  ],
+  "cSpell.enableFiletypes": [
+    "sqlite"
+  ],
+}

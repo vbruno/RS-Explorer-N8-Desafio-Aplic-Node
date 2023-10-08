@@ -1,19 +1,25 @@
 {
-  "rest-client.environmentVariables": {
-
-    "$shared": {
-      "url": "http://localhost:3000"
+    "rest-client.environmentVariables": {
+        "$shared": {
+            "url": "http://localhost:3000"
+        },
     },
-
-  },
-  "cSpell.words": [
-    "AUTOINCREMENT",
-    "DATETIME",
-    "knexfile",
-    "sqlite",
-    "VARCHAR"
-  ],
-  "cSpell.enableFiletypes": [
-    "sqlite"
-  ],
+    "cSpell.words": [
+        "airbnb",
+        "AUTOINCREMENT",
+        "DATETIME",
+        "knexfile",
+        "sqlite",
+        "VARCHAR"
+    ],
+    "cSpell.enableFiletypes": [
+        "sqlite"
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.validate": [
+        "javascript",
+        "typescript"
+    ]
 }

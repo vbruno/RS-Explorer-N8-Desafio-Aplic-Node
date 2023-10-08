@@ -1,11 +1,12 @@
 class AppError {
-    message;
-    statusCode;
+  message;
 
-    constructor(message, statusCode = 400) {
-        this.message = message;
-        this.statusCode = statusCode;
-    }
+  statusCode;
+
+  constructor(message, statusCode = 400) {
+    this.message = message;
+    this.statusCode = statusCode;
+  }
 }
 
 module.exports = AppError;

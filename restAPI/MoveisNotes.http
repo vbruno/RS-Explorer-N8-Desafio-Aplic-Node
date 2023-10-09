@@ -6,14 +6,15 @@
 GET {{url}}/{{rota}}
 
 ###
-# @name CreateUser
+# @name Create
 POST {{url}}/{{rota}}/create
 Content-Type: application/json
 
 {
-    "name": "Teste",
-    "email": "test@com.br",
-    "password": "123456"
+    "title": "Destinmos à Deriva",
+    "description": "Grávida, sozinha e perdida no mar, uma mulher que está presa em um container tenta sobreviver após fugir de um país totalitário e destruído.",
+    "rating": 3.3,
+    "userId": 1
 }
 
 ###
@@ -21,20 +22,18 @@ Content-Type: application/json
 GET {{url}}/{{rota}}/showAll
 
 ###
-# @name ShowUser
-GET {{url}}/{{rota}}/{{idUser}}
+# @name Index
+GET {{url}}/{{rota}}/1
 
 ###
-# @name DeleteUser
-DELETE {{url}}/{{rota}}/{{idUser}}
+# @name Delete
+DELETE {{url}}/{{rota}}/3
 
 ###
-# @name UpdateUser
-PUT {{url}}/{{rota}}/{{idUser}}
+# @name Update
+PUT {{url}}/{{rota}}/2
 Content-Type: application/json
 
 {
-    "name": "Bruno",
-    "email": "bruno@teste.com.br",
-    "password": "123456"
+    "rating": 3.3
 }

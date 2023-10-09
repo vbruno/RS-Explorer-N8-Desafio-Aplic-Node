@@ -9,5 +9,9 @@ MovieNotesRouter.get('/', (req, res) => {
 });
 
 MovieNotesRouter.post('/create', movieNotesController.create);
+MovieNotesRouter.get('/showAll', movieNotesController.showAll);
+MovieNotesRouter.get('/:id', movieNotesController.index);
+MovieNotesRouter.delete('/:id', movieNotesController.delete);
+MovieNotesRouter.put('/:id', movieNotesController.update);
 
 module.exports = { MovieNotesRouter };

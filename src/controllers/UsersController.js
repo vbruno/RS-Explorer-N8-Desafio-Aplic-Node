@@ -9,6 +9,26 @@ class UsersController {
   async create(req, res) {
     const { name, email, password } = req.body;
 
+    if (!name || !email || !password) {
+      throw new AppError('Missing body parameter', 400);
+    }
+
+    if (!email.includes('@')) {
+      throw new AppError('Invalid email', 400);
+    }
+
+    const [userExists] = await knex('users').where({ email });
+
+    if (userExists) {
+      throw new AppError('User already exists', 400);
+    }
+
+    if (password.length < 6) {
+      throw new AppError('Password must be at least 6 characters', 400);
+    } if (password.length > 20) {
+      throw new AppError('Password must be less than 20 characters', 400);
+    }
+
     const [user] = await knex('users').insert({
       name,
       email,

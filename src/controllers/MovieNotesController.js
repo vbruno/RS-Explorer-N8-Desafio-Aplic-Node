@@ -1,27 +1,31 @@
 const dayjs = require('dayjs');
+const AppError = require('../utils/AppError');
+
 const knex = require('../database/knex');
 
 class MovieNotesController {
   async create(req, res) {
     const {
-      title, description, rating, userId,
+      title, description, rating, userId, tags,
     } = req.body;
 
-    if (!title || !description || !rating || !userId) {
-      return res.status(400).json({ error: 'Missing body parameter' });
+    if (!title || !description || !rating || !userId || !tags) {
+      throw new AppError('Missing body parameter', 400);
     }
 
     if (rating < 0 || rating > 5) {
-      return res.status(400).json({ error: 'Rating must be between 0 and 5' });
+      throw new AppError('Rating must be between 0 and 5', 400);
     }
 
     const userExists = await knex('users').where({ id: userId });
 
     if (!userExists) {
-      return res.status(400).json({ error: 'User not found' });
+      throw new AppError('User not found', 400);
     }
 
-    console.log(userExists);
+    if (!tags) {
+      throw new AppError('Missing tags', 400);
+    }
 
     const [movieNote] = await knex('movie_notes').insert({
       title,
@@ -30,7 +34,19 @@ class MovieNotesController {
       user_id: userId,
     }).returning('*');
 
-    return res.json(movieNote);
+    console.log(tags);
+
+    const tagsInsert = tags.map((name) => ({
+      movieNote_id: movieNote.id,
+      user_id: userId,
+      name,
+    }));
+
+    console.log(tagsInsert);
+
+    await knex('movie_tags').insert(tagsInsert);
+
+    return res.json({ ...movieNote, tags: tagsInsert });
   }
 
   async showAll(req, res) {
@@ -44,12 +60,14 @@ class MovieNotesController {
     const idExists = await knex('movie_notes').where({ id });
 
     if (!idExists) {
-      return res.status(400).json({ error: 'Movie note not found' });
+      throw new AppError('Movie note not found', 400);
     }
 
     const [movieNote] = await knex('movie_notes').where({ id });
 
-    return res.json(movieNote);
+    const tags = await knex('movie_tags').where({ user_id: id }).orderBy('name');
+
+    return res.json({ ...movieNote, tags });
   }
 
   async delete(req, res) {
@@ -69,7 +87,12 @@ class MovieNotesController {
     const [movieNoteExists] = await knex('movie_notes').where({ id });
 
     if (!movieNoteExists) {
-      return res.status(400).json({ error: 'Movie note not found' });
+      throw new AppError('Movie note not found', 400);
+    }
+    if (rating) {
+      if (rating < 0 || rating > 5) {
+        throw new AppError('Rating must be between 0 and 5', 400);
+      }
     }
 
     const [movieNote] = await knex('movie_notes').where({ id }).update({
